@@ -21,7 +21,8 @@ def __init__():
 
 
 def get_kube_config(aws_default_region, cluster_name, envs):
-    command = 'eks --region %s update-kubeconfig --name %s --kubeconfig .kube-config' % (aws_default_region, cluster_name)
+    kubeconfig = get_config_value('plugins.kube.parameters.kubeconfig', '') or '/work/.kube-config'
+    command = 'eks --region %s update-kubeconfig --name %s --kubeconfig %s' % (aws_default_region, cluster_name, kubeconfig)
     container.create(
         image=AWS_IMAGE,
         command=command,
@@ -40,7 +41,7 @@ def kubectl(args, cluster_name, workspace, aws_role, aws_default_region):
     cluster_name = cluster_name or get_config_value('plugins.kube.parameters.cluster_name')
     aws_default_region = aws_default_region or get_config_value('plugins.kube.parameters.aws_default_region')
     envs = environment.build(workspace, aws_role).get_env()
-    envs['KUBECONFIG'] = '.kube-config'
+    envs['KUBECONFIG'] = get_config_value('plugins.kube.parameters.kubeconfig', '') or '/work/.kube-config'
 
     get_kube_config(aws_default_region, cluster_name, envs)
     entrypoint = 'kubectl'
@@ -49,7 +50,6 @@ def kubectl(args, cluster_name, workspace, aws_role, aws_default_region):
     for arg in args:
         command += '%s ' % (arg)
 
-    kube_config_volume = '.kube-config:/root/.kube/config'
     container.create(
         image=KUBE_TOOLS_IMAGE,
         command=command,
@@ -69,7 +69,7 @@ def helm(args, cluster_name, workspace, aws_role, aws_default_region):
     cluster_name = cluster_name or get_config_value('plugins.kube.parameters.cluster_name')
     aws_default_region = aws_default_region or get_config_value('plugins.kube.parameters.aws_default_region')
     envs = environment.build(workspace, aws_role).get_env()
-    envs['KUBECONFIG'] = '.kube-config'
+    envs['KUBECONFIG'] = get_config_value('plugins.kube.parameters.kubeconfig', '') or '/work/.kube-config'
 
     get_kube_config(aws_default_region, cluster_name, envs)
     entrypoint = 'helm'
@@ -78,7 +78,6 @@ def helm(args, cluster_name, workspace, aws_role, aws_default_region):
     for arg in args:
         command += '%s ' % (arg)
 
-    kube_config_volume = '.kube-config:/root/.kube/config'
     container.create(
         image=KUBE_TOOLS_IMAGE,
         command=command,
@@ -97,15 +96,15 @@ def kube_bash(cluster_name, workspace, aws_role, aws_default_region):
     cluster_name = cluster_name or get_config_value('plugins.kube.parameters.cluster_name')
     aws_default_region = aws_default_region or get_config_value('plugins.kube.parameters.aws_default_region')
     envs = environment.build(workspace, aws_role).get_env()
-    envs['KUBECONFIG'] = '.kube-config'
+    envs['KUBECONFIG'] = get_config_value('plugins.kube.parameters.kubeconfig', '') or '/work/.kube-config'
 
     get_kube_config(aws_default_region, cluster_name, envs)
     entrypoint = '/bin/bash'
 
-    kube_config_volume = '.kube-config:/root/.kube/config'
     container.create(
         image=KUBE_TOOLS_IMAGE,
         entrypoint=entrypoint,
+        ports=['8001:8001'],
         volumes=['.:/work'],
         environment=envs
     )

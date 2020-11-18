@@ -13,6 +13,7 @@ plugins:
     parameters:
       cluster_name: <redact>
       aws_default_region: <redact>
+      kubeconfig: # Optional: Override default kubeconfig path
 ```
 
 ## Usage
