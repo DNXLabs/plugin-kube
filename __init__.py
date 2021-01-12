@@ -36,11 +36,13 @@ def get_kube_config(aws_default_region, cluster_name, envs):
 @click.option('-n', '--cluster-name', 'cluster_name', default=None, type=str, help='AWS EKS cluster name.')
 @click.option('-w', '--workspace', default=None, type=str, help='Workspace to use.')
 @click.option('-r', '--aws-role', 'aws_role', default=None, type=str, help='AWS role to use.')
+@click.option('-a', '--aws-assume-role', 'aws_assume_role', default=None, type=str, help='AWS assume role.')
 @click.option('-R', '--aws-default-region', 'aws_default_region', default=None, type=str, help='AWS default region to use.')
-def kubectl(args, cluster_name, workspace, aws_role, aws_default_region):
+def kubectl(args, cluster_name, workspace, aws_role, aws_assume_role, aws_default_region):
     cluster_name = cluster_name or get_config_value('plugins.kube.parameters.cluster_name')
     aws_default_region = aws_default_region or get_config_value('plugins.kube.parameters.aws_default_region')
-    envs = environment.build(workspace, aws_role).get_env()
+    aws_assume_role = aws_assume_role or get_config_value('plugins.kube.parameters.aws_assume_role', 'false')
+    envs = environment.build(workspace=workspace, aws_role=aws_role, aws_assume_role=aws_assume_role).get_env()
     envs['KUBECONFIG'] = get_config_value('plugins.kube.parameters.kubeconfig', '') or '/work/.kube-config'
 
     get_kube_config(aws_default_region, cluster_name, envs)
@@ -64,11 +66,13 @@ def kubectl(args, cluster_name, workspace, aws_role, aws_default_region):
 @click.option('-n', '--cluster-name', 'cluster_name', default=None, type=str, help='AWS EKS cluster name.')
 @click.option('-w', '--workspace', default=None, type=str, help='Workspace to use.')
 @click.option('-r', '--aws-role', 'aws_role', default=None, type=str, help='AWS role to use.')
+@click.option('-a', '--aws-assume-role', 'aws_assume_role', default=None, type=str, help='AWS assume role.')
 @click.option('-R', '--aws-default-region', 'aws_default_region', default=None, type=str, help='AWS default region to use.')
-def helm(args, cluster_name, workspace, aws_role, aws_default_region):
+def helm(args, cluster_name, workspace, aws_role, aws_assume_role, aws_default_region):
     cluster_name = cluster_name or get_config_value('plugins.kube.parameters.cluster_name')
     aws_default_region = aws_default_region or get_config_value('plugins.kube.parameters.aws_default_region')
-    envs = environment.build(workspace, aws_role).get_env()
+    aws_assume_role = aws_assume_role or get_config_value('plugins.kube.parameters.aws_assume_role', 'false')
+    envs = environment.build(workspace=workspace, aws_role=aws_role, aws_assume_role=aws_assume_role).get_env()
     envs['KUBECONFIG'] = get_config_value('plugins.kube.parameters.kubeconfig', '') or '/work/.kube-config'
 
     get_kube_config(aws_default_region, cluster_name, envs)
@@ -91,11 +95,13 @@ def helm(args, cluster_name, workspace, aws_role, aws_default_region):
 @click.option('-n', '--cluster-name', 'cluster_name', default=None, type=str, help='AWS EKS cluster name.')
 @click.option('-w', '--workspace', default=None, type=str, help='Workspace to use.')
 @click.option('-r', '--aws-role', 'aws_role', default=None, type=str, help='AWS role to use.')
+@click.option('-a', '--aws-assume-role', 'aws_assume_role', default=None, type=str, help='AWS assume role.')
 @click.option('-R', '--aws-default-region', 'aws_default_region', default=None, type=str, help='AWS default region to use.')
-def kube_bash(cluster_name, workspace, aws_role, aws_default_region):
+def kube_bash(cluster_name, workspace, aws_role, aws_assume_role, aws_default_region):
     cluster_name = cluster_name or get_config_value('plugins.kube.parameters.cluster_name')
     aws_default_region = aws_default_region or get_config_value('plugins.kube.parameters.aws_default_region')
-    envs = environment.build(workspace, aws_role).get_env()
+    aws_assume_role = aws_assume_role or get_config_value('plugins.kube.parameters.aws_assume_role', 'false')
+    envs = environment.build(workspace=workspace, aws_role=aws_role, aws_assume_role=aws_assume_role).get_env()
     envs['KUBECONFIG'] = get_config_value('plugins.kube.parameters.kubeconfig', '') or '/work/.kube-config'
 
     get_kube_config(aws_default_region, cluster_name, envs)
