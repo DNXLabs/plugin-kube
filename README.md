@@ -13,6 +13,7 @@ plugins:
     parameters:
       cluster_name: <redact>
       aws_default_region: <redact>
+      aws_assume_role: # Optional: default to false
       kubeconfig: # Optional: Override default kubeconfig path
 ```
 
