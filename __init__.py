@@ -17,7 +17,7 @@ KUBE_TOOLS_IMAGE = 'dnxsolutions/docker-kube-tools:0.2.0'
 def __init__():
     cli.add_command(kubectl)
     cli.add_command(helm)
-    cli.add_command(kube_bash)
+    cli.add_command(kube_shell)
     cli.add_command(kube_proxy)
 
 
@@ -92,13 +92,13 @@ def helm(args, cluster_name, workspace, aws_role, aws_assume_role, aws_default_r
     )
 
 
-@click.command(name='kube-bash', help='Bash entry to EKS environment.')
+@click.command(name='kube-shell', help='Shell entry to EKS environment.')
 @click.option('-n', '--cluster-name', 'cluster_name', default=None, type=str, help='AWS EKS cluster name.')
 @click.option('-w', '--workspace', default=None, type=str, help='Workspace to use.')
 @click.option('-r', '--aws-role', 'aws_role', default=None, type=str, help='AWS role to use.')
 @click.option('-a', '--aws-assume-role', 'aws_assume_role', default=None, type=str, help='AWS assume role.')
 @click.option('-R', '--aws-default-region', 'aws_default_region', default=None, type=str, help='AWS default region to use.')
-def kube_bash(cluster_name, workspace, aws_role, aws_assume_role, aws_default_region):
+def kube_shell(cluster_name, workspace, aws_role, aws_assume_role, aws_default_region):
     cluster_name = cluster_name or get_config_value('plugins.kube.parameters.cluster_name')
     aws_default_region = aws_default_region or get_config_value('plugins.kube.parameters.aws_default_region')
     aws_assume_role = aws_assume_role or get_config_value('plugins.kube.parameters.aws_assume_role', 'false')
