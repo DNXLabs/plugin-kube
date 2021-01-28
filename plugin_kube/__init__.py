@@ -1,10 +1,8 @@
 import click
-import os
 from one.one import cli
 from one.docker.container import Container
 from one.docker.image import Image
 from one.utils.environment.aws import EnvironmentAws
-from one.__init__ import CLI_ROOT
 from one.utils.config import get_config_value
 
 container = Container()
