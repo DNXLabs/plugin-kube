@@ -13,7 +13,7 @@ This is a one-cli plugin that adds Kubernetes tools alias to the CLI.
 required_version: ">= 0.7.0"
 
 plugins:
-- package: one-cli-plugin-kube==0.5.0
+- package: one-cli-plugin-kube==0.5.1
   module: 'plugin_kube'
   parameters:
     cluster_name: <redact>
