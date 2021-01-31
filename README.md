@@ -2,9 +2,9 @@
 
 This is a one-cli plugin that adds Kubernetes tools alias to the CLI.
 
-![Build](https://github.com/DNXLabs/plugin-dnx-assume/workflows/Build/badge.svg)
-[![PyPI](https://badge.fury.io/py/one-cli-plugin-dnx-assume.svg)](https://pypi.python.org/pypi/one-cli-plugin-dnx-assume/)
-[![LICENSE](https://img.shields.io/github/license/DNXLabs/plugin-dnx-assume)](https://github.com/DNXLabs/plugin-dnx-assume/blob/master/LICENSE)
+![Build](https://github.com/DNXLabs/plugin-kube/workflows/Build/badge.svg)
+[![PyPI](https://badge.fury.io/py/one-cli-plugin-kube.svg)](https://pypi.python.org/pypi/one-cli-plugin-kube/)
+[![LICENSE](https://img.shields.io/github/license/DNXLabs/plugin-kube)](https://github.com/DNXLabs/plugin-kube/blob/master/LICENSE)
 
 ## Configuration
 
