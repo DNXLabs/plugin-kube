@@ -9,7 +9,7 @@ container = Container()
 image = Image()
 environment = EnvironmentAws()
 AWS_IMAGE = image.get_image('aws')
-KUBE_TOOLS_IMAGE = 'dnxsolutions/docker-kube-tools:0.2.0'
+KUBE_TOOLS_IMAGE = 'dnxsolutions/docker-kube-tools:0.3.2'
 
 
 def __init__():
