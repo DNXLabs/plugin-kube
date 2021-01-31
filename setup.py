@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 install_requires = []
 
-__version__ = '0.5.1'
+__version__ = '0.5.2'
 
 setup(
     name='one-cli-plugin-kube',

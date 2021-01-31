@@ -10,16 +10,17 @@ This is a one-cli plugin that adds Kubernetes tools alias to the CLI.
 
 ```yaml
 # one.yaml
-required_version: ">= 0.7.0"
+required_version: ">= 0.7.1"
 
 plugins:
-- package: one-cli-plugin-kube==0.5.1
-  module: 'plugin_kube'
-  parameters:
-    cluster_name: <redact>
-    aws_default_region: <redact>
-    aws_assume_role: # Optional: default to false
-    kubeconfig: # Optional: Override default kubeconfig path
+  kube:
+    package: one-cli-plugin-kube==0.5.2
+    module: 'plugin_kube'
+    parameters:
+      cluster_name: <redact>
+      aws_default_region: <redact>
+      aws_assume_role: # Optional: default to false
+      kubeconfig: # Optional: Override default kubeconfig path
 ```
 
 ## Usage
